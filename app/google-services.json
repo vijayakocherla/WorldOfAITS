@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "749859916134",
+    "firebase_url": "https://worldofaits-98fbc.firebaseio.com",
+    "project_id": "worldofaits-98fbc",
+    "storage_bucket": "worldofaits-98fbc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749859916134:android:b45b866556eb6a7ecaa0a7",
+        "android_client_info": {
+          "package_name": "com.example.worldofaits"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "749859916134-611dvv162bs0qr37l75cvsftu9l8l9q6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.worldofaits",
+            "certificate_hash": "2210e6039f1a41dd75ef5b33b27675404f2e9d80"
+          }
+        },
+        {
+          "client_id": "749859916134-ugmm68o6mk3fpioeodsrkpbn4t51t991.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgPe9ZdGdpT9Q2bB_CYx9GPDfkruG2duc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "749859916134-ugmm68o6mk3fpioeodsrkpbn4t51t991.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
