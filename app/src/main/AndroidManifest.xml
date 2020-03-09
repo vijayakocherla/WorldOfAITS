@@ -9,14 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FacultyForgotPassword"></activity>
+        <activity android:name=".UploadImage"></activity>
+        <activity android:name=".FacultyForgotPassword" />
         <activity android:name=".Profile" />
         <activity android:name=".MaterialView" />
         <activity android:name=".Register" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Campus" />
         <activity android:name=".Hostel" />
-        <activity android:name=".Login">
+        <activity
+            android:name=".Login"
+            android:theme="@style/Theme.Design.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

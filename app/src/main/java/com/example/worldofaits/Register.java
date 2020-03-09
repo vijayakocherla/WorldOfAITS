@@ -44,9 +44,6 @@ public class Register extends AppCompatActivity {
         id=findViewById(R.id.register_collegeID);
         rghostler=findViewById(R.id.reg_rg_hostler);
         rgcrt=findViewById(R.id.reg_rg_crt);
-       // hos=findViewById(R.id.shostler);
-       // crt=findViewById(R.id.sCRT);
-
 
         if(mAuth.getCurrentUser() != null){
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
@@ -100,7 +97,7 @@ public class Register extends AppCompatActivity {
             return;
         }
         //String roll=new String(ak1a0);
-        boolean notcid= cid.contains("ak1a0")||cid.contains("ak5a0");
+        boolean notcid= cid.contains("ak1a0")||cid.contains("ak5a0")||cid.contains("AK1A0")||cid.contains("AK5A0");
         if(!notcid){
             id.setError("it is not aits ID");
             return;
@@ -149,23 +146,6 @@ public class Register extends AppCompatActivity {
                     }
                 });
 
-//            dmodel=new DataModel(dname,did,dmail,dpsd,crtCheck,hosCheck);
-//            myRef.child("AITS").child("Total").child(myRef.push().getKey()).setValue(dmodel)
-//                    .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<Void> task) {
-//                            if(task.isSuccessful()){
-//                                Toast.makeText(Register.this, "Data is stored", Toast.LENGTH_SHORT).show();
-//
-//                            }
-//                        }
-//                    })
-//                    .addOnFailureListener(this, new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//                            Toast.makeText(Register.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
 
     }
 

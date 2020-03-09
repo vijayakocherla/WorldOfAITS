@@ -8,12 +8,15 @@
     android:background="@drawable/background_login"
     android:layout_height="match_parent"
     tools:context=".Login">
-    <ImageView
-    android:layout_marginTop="100dp"
-    android:layout_width="60dp"
-    android:layout_height="60dp"
+
+    <de.hdodenhof.circleimageview.CircleImageView
+    android:layout_marginTop="175dp"
+    android:layout_width="75dp"
+    android:layout_height="75dp"
     android:layout_gravity="center"
     android:src="@drawable/aits_logo"
+        app:civ_border_width="1dp"
+        app:civ_border_color="#FFF9F9"
     android:contentDescription="Logo" />
     <TextView
         android:layout_width="70dp"
@@ -99,16 +102,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:textColor="@color/white"
         android:text="Want to know more about our college?"
         android:layout_marginLeft="10dp" />
-    <TextView
+
+<TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:text="check in"
-        android:textColor="#ffff"
         android:layout_marginRight="10dp"
-        android:onClick="checkIn"
+        android:layout_marginBottom="100dp"
         android:background="@color/colorPrimaryDark"
-        android:layout_marginBottom="100dp"/>
+        android:onClick="checkIn"
+        android:text="Check in"
+        android:textColor="#ffff" />
 </LinearLayout>
