@@ -111,7 +111,6 @@
                 android:id="@+id/shostler"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="hostler"
                 android:text="yes"
                 android:textColor="@color/white"
                 android:layout_marginStart="5dp"
@@ -122,7 +121,6 @@
             android:layout_height="wrap_content"
             android:text="no"
             android:textColor="@color/white"
-            android:onClick="hostler"
             android:layout_marginBottom="10dp"
             android:id="@+id/nohostler"/>
     </RadioGroup>
@@ -145,7 +143,6 @@
             android:id="@+id/sCRT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="hostler"
             android:textColor="@color/white"
             android:text="yes"
             android:layout_marginStart="5dp"
@@ -155,7 +152,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="no"
-            android:onClick="hostler"
             android:textColor="@color/white"
             android:id="@+id/noCRT"/>
     </RadioGroup>

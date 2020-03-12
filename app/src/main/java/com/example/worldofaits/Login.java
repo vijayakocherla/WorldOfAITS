@@ -33,6 +33,7 @@ EditText mail,key;
         fac=findViewById(R.id.faculty);
         key=findViewById(R.id.password);
         if(mAuth.getCurrentUser() != null){
+
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             finish();
         }
@@ -45,6 +46,7 @@ EditText mail,key;
     }
 
     public void login(View view) {
+
         String email=mail.getText().toString();
         String password=key.getText().toString();
         if(TextUtils.isEmpty(email)){

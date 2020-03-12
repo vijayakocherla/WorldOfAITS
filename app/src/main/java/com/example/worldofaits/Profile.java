@@ -20,6 +20,8 @@ public class Profile extends AppCompatActivity {
 TextView name,cid,password,mail;
 RadioButton pshos,pscrt,pnohos,pnocrt;
 DatabaseReference myRef;
+FirebaseAuth mAuth;
+String userid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,13 +35,15 @@ DatabaseReference myRef;
         pscrt=findViewById(R.id.profile_sCRT);
         pnohos=findViewById(R.id.profile_nohostler);
         pnocrt=findViewById(R.id.profile_noCRT);
-
+        mAuth=FirebaseAuth.getInstance();
+        userid=mAuth.getUid();
         myRef=FirebaseDatabase.getInstance().getReference();
-        myRef.child("AITS").child("Total").orderByChild("-M1uAVaJ_kApzkyVi8Of").addValueEventListener(new ValueEventListener() {
+        myRef.child("AITS").child("Total").orderByChild(userid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
                 for(DataSnapshot ds:dataSnapshot.getChildren()){
-                if(ds.child("email").getValue().toString().equals("vijayakocherla@gmail.com")){
                     String name1=ds.child("fullName").getValue().toString();
                     name.setText(name1);
                     String cid1=ds.child("collegeID").getValue().toString();
@@ -67,7 +71,7 @@ DatabaseReference myRef;
 
 
                 }}
-            }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -75,7 +79,7 @@ DatabaseReference myRef;
             }
         });
 
-    }
+}
 
     public void editUser(View view) {
 
@@ -83,6 +87,11 @@ DatabaseReference myRef;
     }
 
     public void Done(View view) {
+
+    }
+
+    public void prfImg(View view) {
+
 
     }
 }

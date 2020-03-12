@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -30,6 +31,8 @@ public class Register extends AppCompatActivity {
     String hosCheck="",crtCheck="";
     String s="yes";
    // String n="no";
+   static SharedPreferences sp;
+    SharedPreferences.Editor editor;
     DataModel dmodel=new DataModel();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class Register extends AppCompatActivity {
         rghostler=findViewById(R.id.reg_rg_hostler);
         rgcrt=findViewById(R.id.reg_rg_crt);
 
+
         if(mAuth.getCurrentUser() != null){
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             finish();
@@ -52,15 +56,13 @@ public class Register extends AppCompatActivity {
 
     }
 
-    public void hostler(View view) {
-
-    }
-
     public void registerUser(View view) {
 
-        String email=em.getText().toString();
-        String password=psd.getText().toString();
-        String cid=id.getText().toString();
+        final String email=em.getText().toString();
+        final String password=psd.getText().toString();
+        final String cid=id.getText().toString();
+        final String fullName=name.getText().toString();
+
         int selectedIdh=rghostler.getCheckedRadioButtonId();
         int selectedIdc=rgcrt.getCheckedRadioButtonId();
         hos=findViewById(selectedIdh);
@@ -78,10 +80,10 @@ public class Register extends AppCompatActivity {
         else{
             crtCheck= (String) crt.getText();
         }
-        final String dname=name.getText().toString();
-        final String did=id.getText().toString();
-        final String dpsd=psd.getText().toString();
-        final String dmail=em.getText().toString();
+//        final String dname=name.getText().toString();
+//        final String did=id.getText().toString();
+//        final String dpsd=psd.getText().toString();
+//        final String dmail=em.getText().toString();
 
         if(TextUtils.isEmpty(email)){
             em.setError("Email is Required.");
@@ -103,13 +105,17 @@ public class Register extends AppCompatActivity {
             return;
         }
 
+
+
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            dmodel=new DataModel(dname,did,dmail,dpsd,crtCheck,hosCheck);
-           myRef.child("AITS").child("Total").child(myRef.push().getKey()).setValue(dmodel)
+                           // Toast.makeText(Register.this, "s", Toast.LENGTH_SHORT).show();
+                            dmodel=new DataModel(fullName,cid,email,password,crtCheck,hosCheck);
+                            String userid=mAuth.getUid();
+                            myRef.child("AITS").child("Total").child(userid).setValue(dmodel)
                    .addOnCompleteListener( new OnCompleteListener<Void>() {
                        @Override
                        public void onComplete(@NonNull Task<Void> task) {
@@ -125,12 +131,11 @@ public class Register extends AppCompatActivity {
                     }
                     });
                             if(hosCheck.equals(s)){
-                                myRef.child("AITS").child("Hostler").child(myRef.push().getKey()).setValue(dmodel);
+                                myRef.child("AITS").child("Hostler").child(userid).setValue(dmodel);
                             }
                             if(crtCheck.equals(s)){
-                                myRef.child("AITS").child("CRT").child(myRef.push().getKey()).setValue(dmodel);
+                                myRef.child("AITS").child("CRT").child(userid).setValue(dmodel);
                             }
-
                             // Sign in success, update UI with the signed-in user's information
                             startActivity(new Intent(getApplicationContext(),Login.class));
                             finish();
@@ -145,6 +150,7 @@ public class Register extends AppCompatActivity {
                         // ...
                     }
                 });
+
 
 
     }
