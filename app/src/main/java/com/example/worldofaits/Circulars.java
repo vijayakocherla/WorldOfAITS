@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -17,7 +19,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * A simple {@link Fragment} subclass.
  */
 public class Circulars extends Fragment {
-private CircleImageView circleImageView;
+private FloatingActionButton circleImageView;
 View view;
 
     public Circulars() {

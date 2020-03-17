@@ -12,12 +12,17 @@
         <activity android:name=".Uploadfile"></activity>
         <activity android:name=".UploadImage" />
         <activity android:name=".FacultyForgotPassword" />
-        <activity android:name=".Profile" />
+        <activity android:name=".Profile"
+            android:label="My Profile"/>
         <activity android:name=".MaterialView" />
         <activity android:name=".Register" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Campus" />
-        <activity android:name=".Hostel" />
+        <activity android:name=".Campus"
+            android:label="Campus Selection Updates"/>
+        <activity android:name=".Hostel"
+            android:label="Hostel News"/>
+        <activity android:name=".Faculty"
+            android:theme="@style/Theme.Design.Light.NoActionBar"/>
         <activity
             android:name=".Login"
             android:theme="@style/Theme.Design.Light.NoActionBar">

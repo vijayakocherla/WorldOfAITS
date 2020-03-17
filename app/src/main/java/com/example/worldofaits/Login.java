@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,34 +16,33 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity {
-EditText mail,key;
+EditText mail,key,facid,facpsd;
     private FirebaseAuth mAuth;
-
+    DatabaseReference myRef;
     TextView fac;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mAuth = FirebaseAuth.getInstance();
-
+        myRef=FirebaseDatabase.getInstance().getReference();
         mail=findViewById(R.id.user_mail);
         fac=findViewById(R.id.faculty);
         key=findViewById(R.id.password);
+
         if(mAuth.getCurrentUser() != null){
 
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             finish();
         }
-        fac.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setContentView(R.layout.faculty);
-            }
-        });
+
     }
 
     public void login(View view) {
@@ -86,6 +86,7 @@ EditText mail,key;
     public void checkIn(View view) {
         startActivity(new Intent(this,MainActivity.class));
 
+
     }
     //open register class
     public void newRegister(View view) {
@@ -112,12 +113,8 @@ EditText mail,key;
         });
     }
 
-    public void faculty_forgot(View view) {
-        startActivity(new Intent(this,FacultyForgotPassword.class));
-    }
 
-    public void loginFaculty(View view) {
-        startActivity(new Intent(this,MainActivity.class));
-        finish();
+    public void facscreen(View view) {
+        startActivity(new Intent(this,Faculty.class));
     }
 }

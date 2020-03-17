@@ -6,9 +6,9 @@
     android:orientation="vertical"
     android:background="@drawable/background_login"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    tools:context=".Faculty">
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_marginTop="175dp"
+        android:layout_marginTop="150dp"
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:layout_gravity="center"
@@ -58,14 +58,6 @@
                 android:id="@+id/faculty_password"
                 android:hint=" *********"
                 android:inputType="textPassword"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:onClick="faculty_forgot"
-                android:text="forgot password?"
-                android:layout_marginRight="5dp"
-                android:textColor="#2196F3"/>
 
             <Button
                 android:layout_width="wrap_content"

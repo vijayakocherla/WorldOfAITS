@@ -1,13 +1,17 @@
 package com.example.worldofaits;
 
+import android.net.Uri;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 public class DataModel {
-    String fullName,collegeID, email,password,crtCheck,hosCheck;
+    String fullName,collegeID, email,password,crtCheck,hosCheck ;
 
-    public DataModel(){
-
+    public DataModel(String fullName, String collegeID, String email, String password) {
+        this.fullName = fullName;
+        this.collegeID = collegeID;
+        this.email = email;
+        this.password = password;
     }
 
     public DataModel(String fullName, String collegeID, String email, String password, String crtCheck, String hosCheck) {
@@ -17,6 +21,12 @@ public class DataModel {
         this.password = password;
         this.crtCheck = crtCheck;
         this.hosCheck = hosCheck;
+
+    }
+
+
+
+    public DataModel() {
     }
 
     public String getFullName() {

@@ -1,11 +1,15 @@
 package com.example.worldofaits;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -13,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -21,6 +26,13 @@ import com.google.firebase.auth.FirebaseAuth;
 //import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.IOException;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Register extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -28,12 +40,15 @@ public class Register extends AppCompatActivity {
     EditText name,psd,em,id;
     RadioButton hos,crt;
     RadioGroup rghostler,rgcrt;
+    StorageReference mStorageRef;
     String hosCheck="",crtCheck="";
     String s="yes";
+
    // String n="no";
-   static SharedPreferences sp;
-    SharedPreferences.Editor editor;
+  Uri imageUri;
+  String uri;
     DataModel dmodel=new DataModel();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,11 +63,15 @@ public class Register extends AppCompatActivity {
         rghostler=findViewById(R.id.reg_rg_hostler);
         rgcrt=findViewById(R.id.reg_rg_crt);
 
+        mStorageRef= FirebaseStorage.getInstance().getReference();
+
+
 
         if(mAuth.getCurrentUser() != null){
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             finish();
         }
+
 
     }
 
@@ -112,24 +131,24 @@ public class Register extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                           // Toast.makeText(Register.this, "s", Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(Register.this, "s", Toast.LENGTH_SHORT).show();
                             dmodel=new DataModel(fullName,cid,email,password,crtCheck,hosCheck);
                             String userid=mAuth.getUid();
                             myRef.child("AITS").child("Total").child(userid).setValue(dmodel)
-                   .addOnCompleteListener( new OnCompleteListener<Void>() {
-                       @Override
-                       public void onComplete(@NonNull Task<Void> task) {
-                           if (task.isSuccessful()){
-                               Toast.makeText(Register.this, "Registered successfully", Toast.LENGTH_SHORT).show();
-                           }
-                       }
-                   })
-           .addOnFailureListener(new OnFailureListener() {
-               @Override
-               public void onFailure(@NonNull Exception e) {
-                   Toast.makeText(Register.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                    });
+                                    .addOnCompleteListener( new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()){
+                                                Toast.makeText(Register.this, "Registered successfully", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(Register.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                             if(hosCheck.equals(s)){
                                 myRef.child("AITS").child("Hostler").child(userid).setValue(dmodel);
                             }
@@ -154,6 +173,8 @@ public class Register extends AppCompatActivity {
 
 
     }
+
+
 
 
 }

@@ -24,6 +24,7 @@
         android:id="@+id/faculty"
         android:text="Faculty"
         android:gravity="center"
+        android:onClick="facscreen"
         android:background="@drawable/design"
         android:layout_gravity="right"
         android:layout_marginRight="5dp"/>
