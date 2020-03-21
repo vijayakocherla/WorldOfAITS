@@ -4,7 +4,10 @@ package com.example.worldofaits;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +34,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class NewsFeed extends Fragment {
 private FloatingActionButton nf;
-View view;
-TextView namedisplay,msgdisplay,subdisplay,timedisplay;
+DatabaseReference dref;
+DataModelImg dmi;
 
 
     public NewsFeed() {
@@ -39,23 +48,40 @@ TextView namedisplay,msgdisplay,subdisplay,timedisplay;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        view= inflater.inflate(R.layout.fragment_news_feed, container, false);
-        namedisplay=view.findViewById(R.id.news_name);
-
+        final View view= inflater.inflate(R.layout.fragment_news_feed, container, false);
         nf = view.findViewById(R.id.uploadhere);
-  // ci.setClickable(true);
+        final RecyclerView rvn=view.findViewById(R.id.news_recycler);
+        dref= FirebaseDatabase.getInstance().getReference();
+        rvn.setLayoutManager(new LinearLayoutManager(getContext()));
+        dmi=new DataModelImg();
         nf.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-        startActivity(new Intent(getActivity(),UploadImage.class));
+        startActivity(new Intent(getActivity(),ImageNews.class));
        // DataModelImg dmi=new DataModelImg();
-            List<DataModelImg> dataModelImgList=new ArrayList<>();
-
-
         }
          });
 
-    return view;
-    }
+        dref.child("urlsnews").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<DataModelImg> dataModelImgList = new ArrayList<>();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    dmi = ds.getValue(DataModelImg.class);
+                    dataModelImgList.add(dmi);
 
-}
+                }
+                HosAdapter hosfeed = new HosAdapter(getActivity(), dataModelImgList);
+                rvn.setAdapter(hosfeed);
+            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+                });
+    return view;
+    }}
+
+
+
+
+

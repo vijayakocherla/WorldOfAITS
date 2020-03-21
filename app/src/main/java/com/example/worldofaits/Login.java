@@ -39,7 +39,9 @@ EditText mail,key,facid,facpsd;
 
         if(mAuth.getCurrentUser() != null){
 
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            Intent in=new Intent(Login.this,MainActivity.class);
+            in.putExtra("name","student");
+            startActivity(in);
             finish();
         }
 
@@ -65,7 +67,9 @@ EditText mail,key,facid,facpsd;
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        Intent in=new Intent(Login.this,MainActivity.class);
+                        in.putExtra("name","student");
+                        startActivity(in);
 
                     } else {
                         // If sign in fails, display a message to the user.

@@ -38,16 +38,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class UploadImage extends AppCompatActivity {
-ImageView img;
-EditText sub,mes;
-Uri imageUri;
-ProgressDialog pd;
-FirebaseAuth mAuth;
-StorageReference mStorageRef;
+public class ImageCampus extends AppCompatActivity {
+    ImageView img;
+    EditText sub,mes;
+    Uri imageUri;
+    ProgressDialog pd;
+    FirebaseAuth mAuth;
+    StorageReference mStorageRef;
     DatabaseReference dref;
-DataModelImg dataModelImg;
-String name="";
+    DataModelImg dataModelImg;
+    String name="";
     String cid="";
     String email="",propic,time="";
 
@@ -59,35 +59,35 @@ String name="";
         mes=findViewById(R.id.msg);
         img=findViewById(R.id.image_upload);
         mAuth=FirebaseAuth.getInstance();
-         dref= FirebaseDatabase.getInstance().getReference();
-         pd=new ProgressDialog(UploadImage.this);
+        dref= FirebaseDatabase.getInstance().getReference();
+        pd=new ProgressDialog(ImageCampus.this);
         dataModelImg=new DataModelImg();
         mStorageRef= FirebaseStorage.getInstance().getReference();
         String userid=mAuth.getUid();
 //        Calendar cal=Calendar.getInstance(Locale.ENGLISH);
 //        cal.setTimeInMillis(Long.parseLong(timestamp));
 //         time = DateFormat.format("dd-MM-yyyy hh:mm:ss", cal).toString();
-         dref.child("AITS").child("Total").orderByChild(userid).addValueEventListener(new ValueEventListener() {
-             @Override
-             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                 for (DataSnapshot ds1:dataSnapshot.getChildren()){
-                      name=ds1.child("fullName").getValue().toString();
-                      cid=ds1.child("collegeID").getValue().toString();
-                      email=ds1.child("email").getValue().toString();
-                      if(ds1.child("profilepic").exists()){
-                          propic=ds1.child("profilepic").getValue().toString();
-                      }
-                      else{
-                         // String url=
-                      }
-                 }
-             }
+        dref.child("AITS").child("Total").orderByChild(userid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds1:dataSnapshot.getChildren()){
+                    name=ds1.child("fullName").getValue().toString();
+                    cid=ds1.child("collegeID").getValue().toString();
+                    email=ds1.child("email").getValue().toString();
+                    if(ds1.child("profilepic").exists()){
+                        propic=ds1.child("profilepic").getValue().toString();
+                    }
+                    else{
+                        // String url=
+                    }
+                }
+            }
 
-             @Override
-             public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-             }
-         });
+            }
+        });
     }
 
     public void uploadimage(final View view) {
@@ -107,33 +107,33 @@ String name="";
             // Find todays date
 
             final StorageReference storage=mStorageRef.child("images").child(SystemClock.elapsedRealtime()+".jpeg");
-        storage.putFile(imageUri)
-                .continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                       if(task.isSuccessful()){
-                           return storage.getDownloadUrl();
-                       }
-                        return null;
-                    }
-                })
-                .addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        Uri uri=task.getResult();
-                        pd.dismiss();
-                        Toast.makeText(UploadImage.this, "Image uploaded", Toast.LENGTH_SHORT).show();
-                        dataModelImg = new DataModelImg(uri.toString(), mes.getText().toString(), sub.getText().toString(), name, cid, email,time,propic);
-                        dref.child("urls").child(SystemClock.elapsedRealtime() + "").setValue(dataModelImg);
+            storage.putFile(imageUri)
+                    .continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                        @Override
+                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                            if(task.isSuccessful()){
+                                return storage.getDownloadUrl();
+                            }
+                            return null;
+                        }
+                    })
+                    .addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            Uri uri=task.getResult();
+                            pd.dismiss();
+                            Toast.makeText(ImageCampus.this, "Image uploaded", Toast.LENGTH_SHORT).show();
+                            dataModelImg = new DataModelImg(uri.toString(), mes.getText().toString(), sub.getText().toString(), name, cid, email,time,propic);
+                            dref.child("urlscampus").child(SystemClock.elapsedRealtime() + "").setValue(dataModelImg);
 
 
-                    }
-                });}
-         else {
-           // Toast.makeText(UploadImage.this, ""+imageUri.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    });}
+        else {
+            // Toast.makeText(UploadImage.this, ""+imageUri.toString(), Toast.LENGTH_SHORT).show();
             dataModelImg = new DataModelImg(null, mes.getText().toString(), sub.getText().toString(), name, cid, email,time,propic);
-            dref.child("urls").child(SystemClock.elapsedRealtime() + "").setValue(dataModelImg);
-            Toast.makeText(UploadImage.this, "text uploaded", Toast.LENGTH_SHORT).show();
+            dref.child("urlscampus").child(SystemClock.elapsedRealtime() + "").setValue(dataModelImg);
+            Toast.makeText(ImageCampus.this, "text uploaded", Toast.LENGTH_SHORT).show();
 
         }
 

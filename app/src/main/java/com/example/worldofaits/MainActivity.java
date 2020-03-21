@@ -34,10 +34,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu1,menu);
+        if (getIntent().getStringExtra("name").equals("faculty")) {
+            MenuItem itemid = menu.findItem(R.id.profile);
+            itemid.setVisible(false);
+        }
         return super.onCreateOptionsMenu(menu);
     }
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
+
+
             case R.id.hostel:
                 startActivity(new Intent(this,Hostel.class));
                 break;

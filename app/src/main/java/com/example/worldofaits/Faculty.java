@@ -44,7 +44,9 @@ public class Faculty extends AppCompatActivity {
                                 String pswd=ds.child("password").getValue().toString();
                                 if(pswd.equals(facp)){
 
-                                    startActivity(new Intent(Faculty.this,MainActivity.class));
+                                    Intent in=new Intent(Faculty.this,MainActivity.class);
+                                    in.putExtra("name","faculty");
+                                    startActivity(in);
 
                                 }
                                 else {

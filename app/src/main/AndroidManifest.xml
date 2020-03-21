@@ -10,6 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Uploadfile"></activity>
+        <activity android:name=".ImageCampus"/>
+        <activity android:name=".ImageNews"/>
         <activity android:name=".UploadImage" />
         <activity android:name=".FacultyForgotPassword" />
         <activity android:name=".Profile"
