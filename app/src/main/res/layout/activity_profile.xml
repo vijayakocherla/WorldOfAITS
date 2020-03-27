@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/background_login"
+    android:background="@drawable/bckgrnd1"
     android:layout_height="match_parent"
     tools:context=".Profile">
 
@@ -44,6 +43,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="cursive"
+            android:textSize="20dp"
             android:text="Full Name:"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
@@ -63,6 +64,8 @@
             android:layout_height="wrap_content"
             android:text="College ID:"
             android:layout_marginRight="10dp"
+            android:fontFamily="cursive"
+            android:textSize="20dp"
             android:layout_marginLeft="10dp"
             android:textColor="@color/white"
             android:textStyle="bold"
@@ -81,6 +84,8 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:layout_marginRight="10dp"
+            android:fontFamily="cursive"
+            android:textSize="20dp"
             android:layout_marginLeft="10dp"
             android:text="Recovery email ID:"
             android:textStyle="bold"
@@ -98,6 +103,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Password:"
+            android:fontFamily="cursive"
+            android:textSize="20dp"
             android:textColor="@color/white"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
@@ -118,6 +125,8 @@
             android:layout_height="wrap_content"
             android:text="Hostel:"
             android:textStyle="bold"
+            android:fontFamily="cursive"
+            android:textSize="20dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:textColor="@color/white"
@@ -135,6 +144,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="yes"
+            android:fontFamily="cursive"
+            android:textSize="20dp"
             android:textColor="@color/white"
             android:layout_marginStart="5dp"
             android:layout_marginRight="10dp"
@@ -143,6 +154,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="no"
+            android:fontFamily="cursive"
+            android:textSize="20dp"
             android:textColor="@color/white"
             android:layout_marginBottom="10dp"
             android:id="@+id/profile_nohostler"/>
@@ -152,6 +165,8 @@
             android:layout_height="wrap_content"
             android:text="Campus Recruitment Training:"
             android:textColor="@color/white"
+            android:fontFamily="cursive"
+            android:textSize="20dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:textStyle="bold"
@@ -168,6 +183,8 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:text="yes"
+            android:fontFamily="cursive"
+            android:textSize="20dp"
             android:layout_marginStart="5dp"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp" />
@@ -175,6 +192,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="no"
+            android:fontFamily="cursive"
+            android:textSize="20dp"
             android:textColor="@color/white"
             android:id="@+id/profile_noCRT"/>
     </RadioGroup>
@@ -189,5 +208,5 @@
             android:gravity="center"
             android:onClick="save"
             android:text="Save" />
+
     </LinearLayout>
-</ScrollView>

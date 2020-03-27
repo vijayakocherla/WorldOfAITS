@@ -3,7 +3,10 @@ package com.example.worldofaits;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -23,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity {
-EditText mail,key,facid,facpsd;
+EditText mail,key;
     private FirebaseAuth mAuth;
     DatabaseReference myRef;
     TextView fac;
@@ -34,8 +37,15 @@ EditText mail,key,facid,facpsd;
         mAuth = FirebaseAuth.getInstance();
         myRef=FirebaseDatabase.getInstance().getReference();
         mail=findViewById(R.id.user_mail);
-        fac=findViewById(R.id.faculty);
+       // fac=findViewById(R.id.faculty);
         key=findViewById(R.id.password);
+        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.M){
+            if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)==
+                    PackageManager.PERMISSION_DENIED){
+                String[] permissions={Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                requestPermissions(permissions,1000);
+            }
+        }
 
         if(mAuth.getCurrentUser() != null){
 
@@ -67,6 +77,7 @@ EditText mail,key,facid,facpsd;
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
+
                         Intent in=new Intent(Login.this,MainActivity.class);
                         in.putExtra("name","student");
                         startActivity(in);
@@ -89,7 +100,6 @@ EditText mail,key,facid,facpsd;
 
     public void checkIn(View view) {
         startActivity(new Intent(this,MainActivity.class));
-
 
     }
     //open register class
@@ -117,8 +127,19 @@ EditText mail,key,facid,facpsd;
         });
     }
 
-
-    public void facscreen(View view) {
-        startActivity(new Intent(this,Faculty.class));
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(grantResults.length>0&& grantResults[0]==
+                PackageManager.PERMISSION_GRANTED){
+            Toast.makeText(this, "Permissions accepted!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(this, "Please allow storage permissions ...", Toast.LENGTH_SHORT).show();
+        }
     }
+
+    //    public void facscreen(View view) {
+//        startActivity(new Intent(this,Faculty.class));
+//    }
 }

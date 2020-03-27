@@ -3,10 +3,14 @@ package com.example.worldofaits;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.MediaStore;
@@ -118,7 +122,7 @@ public class Register extends AppCompatActivity {
             return;
         }
         //String roll=new String(ak1a0);
-        boolean notcid= cid.contains("ak1a0")||cid.contains("ak5a0")||cid.contains("AK1A0")||cid.contains("AK5A0");
+        boolean notcid= (cid.contains("ak1a0")||cid.contains("ak5a0")||cid.contains("AK1A0")||cid.contains("AK5A0")||cid.contains("aitstpt"))&&(cid.length()==13||cid.length()==10);
         if(!notcid){
             id.setError("it is not aits ID");
             return;
@@ -134,12 +138,23 @@ public class Register extends AppCompatActivity {
                             // Toast.makeText(Register.this, "s", Toast.LENGTH_SHORT).show();
                             dmodel=new DataModel(fullName,cid,email,password,crtCheck,hosCheck);
                             String userid=mAuth.getUid();
+                            if(cid.contains("aitstpt")){
+                                myRef.child("AITS").child("Faculty").child(userid).setValue(dmodel);
+                            }
+                            if(hosCheck.equals(s)){
+                                myRef.child("AITS").child("Hostler").child(userid).setValue(dmodel);
+                            }
+                            if(crtCheck.equals(s)){
+                                myRef.child("AITS").child("CRT").child(userid).setValue(dmodel);
+                            }
                             myRef.child("AITS").child("Total").child(userid).setValue(dmodel)
                                     .addOnCompleteListener( new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()){
                                                 Toast.makeText(Register.this, "Registered successfully", Toast.LENGTH_SHORT).show();
+                                                startActivity(new Intent(getApplicationContext(),Login.class));
+                                                finish();
                                             }
                                         }
                                     })
@@ -149,15 +164,9 @@ public class Register extends AppCompatActivity {
                                             Toast.makeText(Register.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                                         }
                                     });
-                            if(hosCheck.equals(s)){
-                                myRef.child("AITS").child("Hostler").child(userid).setValue(dmodel);
-                            }
-                            if(crtCheck.equals(s)){
-                                myRef.child("AITS").child("CRT").child(userid).setValue(dmodel);
-                            }
+
                             // Sign in success, update UI with the signed-in user's information
-                            startActivity(new Intent(getApplicationContext(),Login.class));
-                            finish();
+
                         } else {
                             // If sign in fails, display a message to the user.
                             //Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -173,8 +182,6 @@ public class Register extends AppCompatActivity {
 
 
     }
-
-
 
 
 }

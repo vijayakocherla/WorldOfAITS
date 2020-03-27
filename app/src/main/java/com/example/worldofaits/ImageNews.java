@@ -45,7 +45,7 @@ public class ImageNews extends AppCompatActivity {
     ProgressDialog pd;
     FirebaseAuth mAuth;
     StorageReference mStorageRef;
-    DatabaseReference dref;
+    DatabaseReference dref,uRef;
     DataModelImg dataModelImg;
     String name="";
     String cid="";
@@ -64,20 +64,17 @@ public class ImageNews extends AppCompatActivity {
         dataModelImg=new DataModelImg();
         mStorageRef= FirebaseStorage.getInstance().getReference();
         String userid=mAuth.getUid();
-//        Calendar cal=Calendar.getInstance(Locale.ENGLISH);
-//        cal.setTimeInMillis(Long.parseLong(timestamp));
-//         time = DateFormat.format("dd-MM-yyyy hh:mm:ss", cal).toString();
-        dref.child("AITS").child("Total").orderByChild(userid).addValueEventListener(new ValueEventListener() {
+        uRef=dref.child("AITS").child("Total").child(userid);
+        ValueEventListener eventListener=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds1:dataSnapshot.getChildren()){
-                    name=ds1.child("fullName").getValue().toString();
-                    cid=ds1.child("collegeID").getValue().toString();
-                    email=ds1.child("email").getValue().toString();
-                    if(ds1.child("profilepic").exists()){
-                        propic=ds1.child("profilepic").getValue().toString();
-                    }
-                    else{
+                for (DataSnapshot ds1 : dataSnapshot.getChildren()) {
+                    name = dataSnapshot.child("fullName").getValue().toString();
+                    cid = dataSnapshot.child("collegeID").getValue().toString();
+                    email = dataSnapshot.child("email").getValue().toString();
+                    if (dataSnapshot.child("profilepic").exists()) {
+                        propic = dataSnapshot.child("profilepic").getValue().toString();
+                    } else {
                         // String url=
                     }
                 }
@@ -87,11 +84,12 @@ public class ImageNews extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        };
+        uRef.addListenerForSingleValueEvent(eventListener);
     }
 
     public void uploadimage(final View view) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"+"\n"+"HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy"+"\n"+"HH:mm");
         time= dateFormat.format(new Date());
         if(TextUtils.isEmpty(sub.getText().toString())){
             sub.setError("Subject is mandatory.");
@@ -125,7 +123,7 @@ public class ImageNews extends AppCompatActivity {
                             Toast.makeText(ImageNews.this, "Image uploaded", Toast.LENGTH_SHORT).show();
                             dataModelImg = new DataModelImg(uri.toString(), mes.getText().toString(), sub.getText().toString(), name, cid, email,time,propic);
                             dref.child("urlsnews").child(SystemClock.elapsedRealtime() + "").setValue(dataModelImg);
-
+                            startActivity(new Intent(ImageNews.this,NewsFeed.class));
 
                         }
                     });}
@@ -134,7 +132,7 @@ public class ImageNews extends AppCompatActivity {
             dataModelImg = new DataModelImg(null, mes.getText().toString(), sub.getText().toString(), name, cid, email,time,propic);
             dref.child("urlsnews").child(SystemClock.elapsedRealtime() + "").setValue(dataModelImg);
             Toast.makeText(ImageNews.this, "text uploaded", Toast.LENGTH_SHORT).show();
-
+            startActivity(new Intent(ImageNews.this,NewsFeed.class));
         }
 
     }

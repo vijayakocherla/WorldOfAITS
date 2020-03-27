@@ -37,7 +37,6 @@ StorageReference sref;
         rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         dref= FirebaseDatabase.getInstance().getReference();
         sref= FirebaseStorage.getInstance().getReference();
-
         dmi=new DataModelImg();
         fc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,8 +53,8 @@ StorageReference sref;
                     dataModelImgList.add(dmi);
 
                 }
-                HosAdapter hosfeed=new HosAdapter(getApplication(),dataModelImgList);
-                rv.setAdapter(hosfeed);
+                HosAdapter camfeed=new HosAdapter(getApplication(),dataModelImgList);
+                rv.setAdapter(camfeed);
 
                 // Toast.makeText(Hostel.this, ""+dataModelImgList.get(0).getUri(), Toast.LENGTH_SHORT).show();
             }

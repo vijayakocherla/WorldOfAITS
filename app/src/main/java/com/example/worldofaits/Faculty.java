@@ -33,7 +33,7 @@ public class Faculty extends AppCompatActivity {
        String fac=facid.getText().toString();
        final String facp=facpsd.getText().toString();
 
-        myRef.child("AITS").child("Faculty").orderByChild(fac)
+        myRef.child("AITS").child("Faculty").child(fac)
 
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

@@ -43,6 +43,7 @@ public class HosAdapter extends RecyclerView.Adapter<HosAdapter.ViewInfo>{
         holder.message.setText(idata.get(position).getMessage());
         holder.id.setText(idata.get(position).getCollegeID());
         holder.time.setText(idata.get(position).getTime());
+        holder.name.setText(idata.get(position).getFullName());
 
         String url=idata.get(position).getUri();
         if(url!=null) {
@@ -69,15 +70,16 @@ public class HosAdapter extends RecyclerView.Adapter<HosAdapter.ViewInfo>{
     }
 
     public class ViewInfo extends RecyclerView.ViewHolder {
-        TextView subject,message,id,time;
+        TextView subject,message,id,time,name;
         ImageView img;
         CardView cd;
         CircleImageView pic;
         public ViewInfo(@NonNull View itemView) {
             super(itemView);
             subject=itemView.findViewById(R.id.sub_hos);
+            name=itemView.findViewById(R.id.hos_name);
             message=itemView.findViewById(R.id.msg_hos);
-            id=itemView.findViewById(R.id.hos_name);
+            id=itemView.findViewById(R.id.hos_id);
             time=itemView.findViewById(R.id.hos_time);
             img=itemView.findViewById(R.id.img_display);
             cd=itemView.findViewById(R.id.cd_hos);

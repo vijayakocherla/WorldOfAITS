@@ -6,24 +6,73 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MaterialView">
-<TextView android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    android:textSize="30dp"
-    android:text="Select year"/>
 
-    <Spinner
-        android:id="@+id/spinner"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/year"/>
-    <TextView android:layout_height="wrap_content"
+        android:text="Select year:"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="30dp"
+        android:textSize="30dp" />
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:textSize="30dp"
-        android:text="Select Semester"/>
-    <Spinner
-        android:id="@+id/spinner1"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp">
+
+        <Button
+            android:id="@+id/cse1"
+            android:onClick="first"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:text="I-year"
+            android:background="@drawable/design"/>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/Semester"/>
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp">
+
+        <Button
+            android:id="@+id/cse2"
+            android:onClick="second"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:text="II-year"
+            android:background="@drawable/design"/>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp">
+
+        <Button
+            android:id="@+id/cse3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="third"
+            android:layout_marginLeft="10dp"
+            android:text="III-year"
+            android:background="@drawable/design"/>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <Button
+            android:id="@+id/cse4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="fourth"
+            android:layout_marginLeft="10dp"
+            android:text="IV-year"
+            android:background="@drawable/design"/>
+    </androidx.cardview.widget.CardView>
+
+
 
 </LinearLayout>

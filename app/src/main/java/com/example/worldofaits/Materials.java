@@ -18,7 +18,7 @@ import android.widget.Toast;
  * A simple {@link Fragment} subclass.
  */
 public class Materials extends Fragment implements View.OnClickListener {
- ImageView icse,iece,ieee,imech,icivil,ihns;
+ ImageView icse,iece,ieee,imech,icivil;
 
 
     @Override
@@ -48,16 +48,16 @@ public class Materials extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getContext(),MaterialView.class));
                 break;
             case R.id.ece:
-                startActivity(new Intent(getContext(),MaterialView.class));
+                startActivity(new Intent(getContext(),EceMaterialView.class));
                 break;
             case R.id.eee:
-                startActivity(new Intent(getContext(),MaterialView.class));
+                startActivity(new Intent(getContext(),EeeMaterialView.class));
                 break;
             case R.id.mech:
-                startActivity(new Intent(getContext(),MaterialView.class));
+                startActivity(new Intent(getContext(),MechMaterialView.class));
                 break;
             case R.id.civil:
-                startActivity(new Intent(getContext(),MaterialView.class));
+                startActivity(new Intent(getContext(),CivilMaterialView.class));
                 break;
 
         }

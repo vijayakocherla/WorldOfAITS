@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.MediaStore;
+import android.text.PrecomputedText;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -38,7 +39,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Profile extends AppCompatActivity {
 EditText name,cid,password,mail;
 RadioButton pshos,pscrt,pnohos,pnocrt;
-DatabaseReference myRef;
+DatabaseReference myRef,uRef;
 FirebaseAuth mAuth;
 String scrtCheck="",shosCheck="";
 String userid;
@@ -50,69 +51,71 @@ CircleImageView img;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        name=findViewById(R.id.profile_name);
-        cid=findViewById(R.id.profile_collegeID);
-        password=findViewById(R.id.profile_password);
-        mail=findViewById(R.id.profile_recovery);
-        pshos=findViewById(R.id.profile_shostler);
-        pscrt=findViewById(R.id.profile_sCRT);
-        pnohos=findViewById(R.id.profile_nohostler);
-        pnocrt=findViewById(R.id.profile_noCRT);
-        img=findViewById(R.id.circularimg);
-        mAuth=FirebaseAuth.getInstance();
-        userid=mAuth.getUid();
-        mStorageRef= FirebaseStorage.getInstance().getReference();
-        myRef=FirebaseDatabase.getInstance().getReference();
+        name = findViewById(R.id.profile_name);
+        cid = findViewById(R.id.profile_collegeID);
+        password = findViewById(R.id.profile_password);
+        mail = findViewById(R.id.profile_recovery);
+        pshos = findViewById(R.id.profile_shostler);
+        pscrt = findViewById(R.id.profile_sCRT);
+        pnohos = findViewById(R.id.profile_nohostler);
+        pnocrt = findViewById(R.id.profile_noCRT);
+        img = findViewById(R.id.circularimg);
+        mAuth = FirebaseAuth.getInstance();
+        userid = mAuth.getUid();
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+        myRef = FirebaseDatabase.getInstance().getReference();
+        //Toast.makeText(this, ""+mAuth.getCurrentUser().toString(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "user id :" + userid, Toast.LENGTH_SHORT).show();
 
-        myRef.child("AITS").child("Total").orderByChild(userid).addValueEventListener(new ValueEventListener() {
+        uRef=myRef.child("AITS").child("Total").child(userid);
+       ValueEventListener eventListener=new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
 
-                for(DataSnapshot ds:dataSnapshot.getChildren()){
-                    if(ds.child("profilepic").exists()){
-                    String url=ds.child("profilepic").getValue().toString();
-                    Picasso.get().load(url).into(img);}
-                    else{
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    if (ds.child("profilepic").exists()) {
+                        String url = ds.child("profilepic").getValue().toString();
+                        Picasso.get().load(url).into(img);
+                    } else {
                         Picasso.get().load(R.drawable.aits_logo).into(img);
                     }
-                    String name1=ds.child("fullName").getValue().toString();
+                    String name1 = dataSnapshot.child("fullName").getValue().toString();
                     name.setText(name1);
-                    String psd1=ds.child("password").getValue().toString();
+                    String psd1 = dataSnapshot.child("password").getValue().toString();
                     password.setText(psd1);
-                    String cid1=ds.child("collegeID").getValue().toString();
+                    String cid1 = dataSnapshot.child("collegeID").getValue().toString();
                     cid.setText(cid1);
-                    String mail1=ds.child("email").getValue().toString();
+                    String mail1 = dataSnapshot.child("email").getValue().toString();
                     mail.setText(mail1);
-                    String crt =ds.child("crtCheck").getValue().toString();
-                     if(crt.equals("yes")){
-                         pscrt.setChecked(true);
-                       //  pscrt.setClickable(false);
-                     }
-                     else {
-                         pnocrt.setChecked(true);
-                       //  pnocrt.setClickable(false);
-                     }
-                    String hos =ds.child("hosCheck").getValue().toString();
-                    if(hos.equals("yes")){
+                    String crt = dataSnapshot.child("crtCheck").getValue().toString();
+                    if (crt.equals("yes")) {
+                        pscrt.setChecked(true);
+                        //  pscrt.setClickable(false);
+                    } else {
+                        pnocrt.setChecked(true);
+                        //  pnocrt.setClickable(false);
+                    }
+                    String hos = dataSnapshot.child("hosCheck").getValue().toString();
+                    if (hos.equals("yes")) {
                         pshos.setChecked(true);
-                       // pshos.setClickable(false);
-                    }
-                    else {
+                        // pshos.setClickable(false);
+                    } else {
                         pnohos.setChecked(true);
-                       // pnohos.setClickable(false);
+                        // pnohos.setClickable(false);
                     }
 
 
-                }}
+                }
+            }
 
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(Profile.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });
-
+        };
+            uRef.addListenerForSingleValueEvent(eventListener);
 }
 
 

@@ -29,15 +29,12 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(myAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu1,menu);
-        if (getIntent().getStringExtra("name").equals("faculty")) {
-            MenuItem itemid = menu.findItem(R.id.profile);
-            itemid.setVisible(false);
-        }
         return super.onCreateOptionsMenu(menu);
     }
     public boolean onOptionsItemSelected(MenuItem item){
@@ -55,8 +52,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(this,Login.class));
-                finish();
+                 Intent intent =new Intent(this,Login.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//makesure user cant go back
+                startActivity(intent);
+
                 break;
         }
         return super.onOptionsItemSelected(item);

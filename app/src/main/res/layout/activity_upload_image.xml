@@ -59,6 +59,7 @@
             android:onClick="uploadimage"
             android:layout_weight="2"
             android:text="upload"
+            android:layout_marginBottom="50dp"
             android:background="@drawable/design"/>
     </LinearLayout>
 </LinearLayout>
