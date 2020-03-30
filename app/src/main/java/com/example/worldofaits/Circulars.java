@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,6 +34,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Circulars extends Fragment {
 
     private FloatingActionButton fbc;
+    FirebaseAuth mAuth;
+    String userid;
 View view;
 DatabaseReference databaseReference;
 DataModelFile dfc;
@@ -51,6 +55,24 @@ DataModelFile dfc;
         databaseReference= FirebaseDatabase.getInstance().getReference();
         rvc.setLayoutManager(new LinearLayoutManager(getContext()));
         dfc=new DataModelFile();
+        mAuth= FirebaseAuth.getInstance();
+        userid=mAuth.getUid();
+        databaseReference.child("AITS").child("Faculty").child(userid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    // fmc2.setVisibility(View.GONE);
+                }
+                else {
+                    fbc.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+              //  Toast.makeText(Circulars.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
         fbc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

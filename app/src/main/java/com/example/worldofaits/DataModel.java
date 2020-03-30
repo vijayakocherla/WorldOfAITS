@@ -14,6 +14,7 @@ public class DataModel {
         this.password = password;
     }
 
+
     public DataModel(String fullName, String collegeID, String email, String password, String crtCheck, String hosCheck) {
         this.fullName = fullName;
         this.collegeID = collegeID;

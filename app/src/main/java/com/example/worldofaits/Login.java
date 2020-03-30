@@ -39,18 +39,12 @@ EditText mail,key;
         mail=findViewById(R.id.user_mail);
        // fac=findViewById(R.id.faculty);
         key=findViewById(R.id.password);
-        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.M){
-            if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)==
-                    PackageManager.PERMISSION_DENIED){
-                String[] permissions={Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                requestPermissions(permissions,1000);
-            }
-        }
+
 
         if(mAuth.getCurrentUser() != null){
 
             Intent in=new Intent(Login.this,MainActivity.class);
-            in.putExtra("name","student");
+            in.putExtra("name","aits");
             startActivity(in);
             finish();
         }
@@ -79,7 +73,7 @@ EditText mail,key;
                         // Sign in success, update UI with the signed-in user's information
 
                         Intent in=new Intent(Login.this,MainActivity.class);
-                        in.putExtra("name","student");
+                        in.putExtra("name","aits");
                         startActivity(in);
 
                     } else {
@@ -99,7 +93,10 @@ EditText mail,key;
     }
 
     public void checkIn(View view) {
-        startActivity(new Intent(this,MainActivity.class));
+        Intent in=new Intent(this,MainActivity.class);
+        in.putExtra("name","otheruser");
+        startActivity(in);
+        //startActivity(new Intent(this,MainActivity.class));
 
     }
     //open register class
@@ -127,17 +124,7 @@ EditText mail,key;
         });
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(grantResults.length>0&& grantResults[0]==
-                PackageManager.PERMISSION_GRANTED){
-            Toast.makeText(this, "Permissions accepted!", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Toast.makeText(this, "Please allow storage permissions ...", Toast.LENGTH_SHORT).show();
-        }
-    }
+
 
     //    public void facscreen(View view) {
 //        startActivity(new Intent(this,Faculty.class));

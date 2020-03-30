@@ -16,6 +16,7 @@ public class MechMaterialView extends AppCompatActivity {
 
 
     public void first(View view) {
+
         startActivity(new Intent(this,Cse1.class));
     }
     public void second(View view) {

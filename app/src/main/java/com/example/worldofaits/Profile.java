@@ -44,6 +44,7 @@ FirebaseAuth mAuth;
 String scrtCheck="",shosCheck="";
 String userid;
 Uri imageUri;
+String simg ="";
 StorageReference mStorageRef;
 CircleImageView img;
     @Override
@@ -72,10 +73,8 @@ CircleImageView img;
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    if (ds.child("profilepic").exists()) {
-                        String url = ds.child("profilepic").getValue().toString();
+                if (dataSnapshot.child("profilepic").exists()) {
+                        String url = dataSnapshot.child("profilepic").getValue().toString();
                         Picasso.get().load(url).into(img);
                     } else {
                         Picasso.get().load(R.drawable.aits_logo).into(img);
@@ -106,7 +105,7 @@ CircleImageView img;
                     }
 
 
-                }
+
             }
 
 
@@ -120,17 +119,19 @@ CircleImageView img;
 
 
     public void save(View view) {
-        DataModel dm = new DataModel();
+     //   DataModel dm = new DataModel();
         DataModel dmhc=new DataModel();
+
 
         final String sname=name.getText().toString();
         final String scid=cid.getText().toString();
         final String spassword=password.getText().toString();
         final String smail=mail.getText().toString();
-        dm =new DataModel(sname,scid,smail,spassword,scrtCheck,shosCheck);
+      //  dm =new DataModel(sname,scid,smail,spassword,scrtCheck,shosCheck);
         dmhc=new DataModel(sname,scid,smail,spassword);
+
        if(pnocrt.isChecked()){
-           myRef.child("AITS").child("CRT").orderByChild(userid)
+           myRef.child("AITS").child("CRT").child(userid)
                    .addListenerForSingleValueEvent(new ValueEventListener() {
                        @Override
                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -148,9 +149,9 @@ CircleImageView img;
                    });
        }
        if(pscrt.isChecked()){
-           final DataModel dm2 =new DataModel(sname,scid,smail,spassword,scrtCheck,shosCheck);
+         //  final DataModel dm2 =new DataModel(sname,scid,smail,spassword,scrtCheck,shosCheck,null);
            final DataModel finalDmhc = dmhc;
-           myRef.child("AITS").child("CRT").orderByChild(userid)
+           myRef.child("AITS").child("CRT").child(userid)
                    .addListenerForSingleValueEvent(new ValueEventListener() {
                        @Override
                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -174,7 +175,7 @@ CircleImageView img;
                    });
        }
        if(pnohos.isChecked()){
-           myRef.child("AITS").child("Hostler").orderByChild(userid)
+           myRef.child("AITS").child("Hostler").child(userid)
                    .addListenerForSingleValueEvent(new ValueEventListener() {
                        @Override
                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -198,7 +199,7 @@ CircleImageView img;
           final DataModel dm1 =new DataModel(sname,scid,smail,spassword,scrtCheck,shosCheck);
 
            final DataModel finalDmhc1 = dmhc;
-           myRef.child("AITS").child("Hostler").orderByChild(userid)
+           myRef.child("AITS").child("Hostler").child(userid)
                    .addListenerForSingleValueEvent(new ValueEventListener() {
                        @Override
                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -222,7 +223,10 @@ CircleImageView img;
                    });
        }
 
-        myRef.child("AITS").child("Total").child(userid).setValue(dm);
+        myRef.child("AITS").child("Total").child(userid).child("fullName").setValue(sname);
+        myRef.child("AITS").child("Total").child(userid).child("collegeID").setValue(scid);
+        myRef.child("AITS").child("Total").child(userid).child("email").setValue(smail);
+        myRef.child("AITS").child("Total").child(userid).child("password").setValue(spassword);
 
     }
 

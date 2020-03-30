@@ -3,6 +3,7 @@ package com.example.worldofaits;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,7 +25,8 @@ import java.util.List;
 
 public class Ece4 extends AppCompatActivity {
         FloatingActionButton fme4;
-
+        FirebaseAuth mAuth;
+        String userid;
         StorageReference sref;
         DatabaseReference dref;
         DataModelFile dmf;
@@ -38,10 +41,31 @@ protected void onCreate(Bundle savedInstanceState) {
         dref= FirebaseDatabase.getInstance().getReference();
         sref= FirebaseStorage.getInstance().getReference();
         dmf=new DataModelFile();
+        mAuth= FirebaseAuth.getInstance();
+        userid=mAuth.getUid();
+        dref.child("AITS").child("Faculty").child(userid).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                                // fmc2.setVisibility(View.GONE);
+                        }
+                        else {
+                                fme4.setVisibility(View.GONE);
+                        }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(Ece4.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+        });
         fme4.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                        startActivity(new Intent(Ece4.this, Uploadfile.class));
+                        Intent intent=new Intent(Ece4.this, MaterialFilesUpload.class);
+                        intent.putExtra("branch","ece4");
+                        startActivity(intent);
+                      //  startActivity(new Intent(Ece4.this, Uploadfile.class));
 
                 }});
         dref.child("ECE").child("ECE4").addValueEventListener(new ValueEventListener() {

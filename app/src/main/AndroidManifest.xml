@@ -15,32 +15,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Cse2"/>
-        <activity android:name=".CivilMaterialView"/>
-        <activity android:name=".MechMaterialView"/>
-        <activity android:name=".EeeMaterialView"/>
-        <activity android:name=".EceMaterialView"/>
+        <activity android:name=".Eee4"/>
+        <activity android:name=".Eee3" />
+        <activity android:name=".Eee2" />
+        <activity android:name=".Eee1" />
+        <activity android:name=".Cse2" />
+        <activity android:name=".CivilMaterialView" />
+        <activity android:name=".MechMaterialView" />
+        <activity android:name=".EeeMaterialView" />
+        <activity android:name=".EceMaterialView" />
+        <activity android:name=".MaterialFilesUpload" />
         <activity android:name=".Cse1" />
-        <activity android:name=".Cse3"/>
-        <activity android:name=".Cse4"/>
-        <activity android:name=".Ece3"/>
-        <activity android:name=".Ece2"/>
-        <activity android:name=".Ece1"/>
-        <activity android:name=".Ece4"/>
+        <activity android:name=".Cse3" />
+        <activity android:name=".Cse4" />
+        <activity android:name=".Ece3" />
+        <activity android:name=".Ece2" />
+        <activity android:name=".Ece1" />
+        <activity android:name=".Ece4" />
         <activity android:name=".Uploadfile" />
         <activity android:name=".ImageCampus" />
         <activity android:name=".ImageNews" />
         <activity android:name=".UploadImage" />
-
         <activity
             android:name=".Profile"
-            android:label="My Profile"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity android:name=".MaterialView" />
-        <activity android:name=".Register"
-            android:theme="@style/Theme.Design.Light.NoActionBar"
+        <activity
+            android:name=".Register"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
             tools:ignore="LockedOrientationActivity" />
         <activity android:name=".MainActivity" />
         <activity
@@ -49,11 +54,10 @@
         <activity
             android:name=".Hostel"
             android:label="Hostel News" />
-
         <activity
             android:name=".Login"
-            android:theme="@style/Theme.Design.Light.NoActionBar"
             android:screenOrientation="portrait"
+            android:theme="@style/Theme.Design.Light.NoActionBar"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

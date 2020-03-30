@@ -23,51 +23,53 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cse2 extends AppCompatActivity {
-    FloatingActionButton fmc2;
-    FirebaseAuth mAuth;
-    String userid;
+public class Eee4 extends AppCompatActivity {
+    FloatingActionButton fmee4;
+
     StorageReference sref;
     DatabaseReference dref;
     DataModelFile dmf;
+    FirebaseAuth mAuth;
+    String userid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       setContentView(R.layout.activity_cse2);
-        fmc2=findViewById(R.id.uploadmatc2);
-        final RecyclerView rc2 =findViewById(R.id.cse2_recycler);
-        rc2.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        setContentView(R.layout.activity_eee4);
+        fmee4=findViewById(R.id.uploadmatee4);
+        final RecyclerView ree4 =findViewById(R.id.eee4_recycler);
+        ree4.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         dref= FirebaseDatabase.getInstance().getReference();
         sref= FirebaseStorage.getInstance().getReference();
         dmf=new DataModelFile();
-        mAuth=FirebaseAuth.getInstance();
+        mAuth= FirebaseAuth.getInstance();
         userid=mAuth.getUid();
         dref.child("AITS").child("Faculty").child(userid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                   // fmc2.setVisibility(View.GONE);
+                    // fmc2.setVisibility(View.GONE);
                 }
                 else {
-                    fmc2.setVisibility(View.GONE);
+                    fmee4.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(Cse2.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Eee4.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-        fmc2.setOnClickListener(new View.OnClickListener() {
+        fmee4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(Cse2.this, MaterialFilesUpload.class);
-                intent.putExtra("branch","cse2");
+                Intent intent=new Intent(Eee4.this, MaterialFilesUpload.class);
+                intent.putExtra("branch","eee4");
                 startActivity(intent);
-                //startActivity(new Intent(Cse2.this, CseFileUploads.class));
+
+                // startActivity(new Intent(Cse1.this, CseFileUploads.class));
 
             }});
-        dref.child("CSE").child("CSE2").addValueEventListener(new ValueEventListener() {
+        dref.child("EEE").child("EEE4").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 List<DataModelFile> dataModelFiles=new ArrayList<>();
@@ -76,8 +78,8 @@ public class Cse2 extends AppCompatActivity {
                     dataModelFiles.add(dmf);
 
                 }
-                FileAdapter matc2=new FileAdapter(getApplication(),dataModelFiles);
-                rc2.setAdapter(matc2);
+                FileAdapter matee4=new FileAdapter(getApplication(),dataModelFiles);
+                ree4.setAdapter(matee4);
 
                 // Toast.makeText(Hostel.this, ""+dataModelImgList.get(0).getUri(), Toast.LENGTH_SHORT).show();
             }
@@ -87,6 +89,5 @@ public class Cse2 extends AppCompatActivity {
 
             }
         });
-
     }
 }

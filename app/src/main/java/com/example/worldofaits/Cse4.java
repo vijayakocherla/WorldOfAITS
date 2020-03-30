@@ -3,6 +3,7 @@ package com.example.worldofaits;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +29,8 @@ public class Cse4 extends AppCompatActivity {
     StorageReference sref;
     DatabaseReference dref;
     DataModelFile dmf;
+    FirebaseAuth mAuth;
+    String userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +42,31 @@ public class Cse4 extends AppCompatActivity {
         dref= FirebaseDatabase.getInstance().getReference();
         sref= FirebaseStorage.getInstance().getReference();
         dmf=new DataModelFile();
+        mAuth= FirebaseAuth.getInstance();
+        userid=mAuth.getUid();
+        dref.child("AITS").child("Faculty").child(userid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    // do nothing
+                }
+                else {
+                    fmc4.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(Cse4.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
         fmc4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Cse4.this, Uploadfile.class));
+                Intent intent=new Intent(Cse4.this, MaterialFilesUpload.class);
+                intent.putExtra("branch","cse4");
+                startActivity(intent);
+                //startActivity(new Intent(Cse4.this, CseFileUploads.class));
 
             }});
         dref.child("CSE").child("CSE4").addValueEventListener(new ValueEventListener() {

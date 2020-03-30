@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +37,7 @@ public class NewsFeed extends Fragment {
 private FloatingActionButton nf;
 DatabaseReference dref;
 DataModelImg dmi;
+FirebaseAuth mAuth;
 
 
     public NewsFeed() {
@@ -51,9 +53,13 @@ DataModelImg dmi;
         final View view= inflater.inflate(R.layout.fragment_news_feed, container, false);
         nf = view.findViewById(R.id.uploadhere);
         final RecyclerView rvn=view.findViewById(R.id.news_recycler);
+        mAuth=FirebaseAuth.getInstance();
         dref= FirebaseDatabase.getInstance().getReference();
         rvn.setLayoutManager(new LinearLayoutManager(getContext()));
         dmi=new DataModelImg();
+        if(mAuth.getUid()==null){
+            nf.setVisibility(View.GONE);
+        }
         nf.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {

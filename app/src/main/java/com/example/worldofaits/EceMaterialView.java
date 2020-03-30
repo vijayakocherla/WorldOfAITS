@@ -18,19 +18,19 @@ public class EceMaterialView extends AppCompatActivity {
 
 
     public void first(View view) {
-        startActivity(new Intent(this,Cse1.class));
+        startActivity(new Intent(this,Ece1.class));
     }
     public void second(View view) {
-        startActivity(new Intent(this,Cse2.class));
+        startActivity(new Intent(this,Ece2.class));
 
     }
 
     public void third(View view) {
-        startActivity(new Intent(this,Cse3.class));
+        startActivity(new Intent(this,Ece3.class));
 
     }
     public void fourth(View view) {
-        startActivity(new Intent(this,Cse4.class));
+        startActivity(new Intent(this,Ece4.class));
 
     }
 
