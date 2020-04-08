@@ -1,6 +1,7 @@
 package com.example.worldofaits;
 
 import android.content.Context;
+import android.text.method.ScrollingMovementMethod;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,7 @@ public class HosAdapter extends RecyclerView.Adapter<HosAdapter.ViewInfo>{
     public void onBindViewHolder(@NonNull ViewInfo holder, int position) {
         holder.subject.setText(idata.get(position).getSubject());
         holder.message.setText(idata.get(position).getMessage());
+        holder.message.setMovementMethod(new ScrollingMovementMethod());
         holder.id.setText(idata.get(position).getCollegeID());
         holder.time.setText(idata.get(position).getTime());
         holder.name.setText(idata.get(position).getFullName());
@@ -48,7 +50,7 @@ public class HosAdapter extends RecyclerView.Adapter<HosAdapter.ViewInfo>{
         String url=idata.get(position).getUri();
         if(url!=null) {
             Picasso.get().load(url).into(holder.img);
-        }
+                   }
         else {
             holder.cd.setVisibility(View.GONE);
         }

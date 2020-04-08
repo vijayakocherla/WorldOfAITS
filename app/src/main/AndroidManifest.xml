@@ -15,7 +15,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Eee4"/>
+        <activity android:name=".Mech4"></activity>
+        <activity android:name=".Mech3" />
+        <activity android:name=".Mech2" />
+        <activity android:name=".Mech1" />
+        <activity android:name=".Civil4" />
+        <activity android:name=".Civil3" />
+        <activity android:name=".Civil2" />
+        <activity android:name=".Civil1" />
+        <activity android:name=".Eee4" />
         <activity android:name=".Eee3" />
         <activity android:name=".Eee2" />
         <activity android:name=".Eee1" />
@@ -38,15 +46,13 @@
         <activity android:name=".UploadImage" />
         <activity
             android:name=".Profile"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Design.Light.NoActionBar"
-            tools:ignore="LockedOrientationActivity" />
+            />
         <activity android:name=".MaterialView" />
         <activity
             android:name=".Register"
-            android:screenOrientation="portrait"
             android:theme="@style/Theme.Design.Light.NoActionBar"
-            tools:ignore="LockedOrientationActivity" />
+            />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".Campus"

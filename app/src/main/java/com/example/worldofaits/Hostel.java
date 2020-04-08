@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +30,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Hostel extends AppCompatActivity {
 FloatingActionButton fh;
-
+FirebaseAuth mAuth;
+String userid;
 StorageReference sref;
 DatabaseReference dref;
     DataModelImg dmi;
@@ -40,9 +42,35 @@ DatabaseReference dref;
         setContentView(R.layout.activity_hostel);
         fh=findViewById(R.id.uploadhere1);
         final RecyclerView rv =findViewById(R.id.hos_recycler);
-        rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+        rv.setLayoutManager(linearLayoutManager);
+       // rv.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,true));
         dref= FirebaseDatabase.getInstance().getReference();
         sref= FirebaseStorage.getInstance().getReference();
+        mAuth= FirebaseAuth.getInstance();
+        userid=mAuth.getUid();
+        if(userid==null){
+            fh.setVisibility(View.GONE);
+        }
+        else{
+        dref.child("AITS").child("Hostler").child(userid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    // fmc2.setVisibility(View.GONE);
+                }
+                else {
+                    fh.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                //  Toast.makeText(Circulars.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });}
          dmi=new DataModelImg();
         fh.setOnClickListener(new View.OnClickListener() {
             @Override

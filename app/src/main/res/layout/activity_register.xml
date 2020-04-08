@@ -8,6 +8,14 @@
     tools:context=".Register"
     android:background="@drawable/bckgrnd1"
     android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp">
 <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -16,7 +24,7 @@
     android:textColor="@color/white"
     android:textStyle="bold"
     android:textSize="30dp"
-    android:layout_marginTop="50dp"
+    android:layout_marginTop="40dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="10dp"
     android:layout_marginBottom="30dp"/>
@@ -194,6 +202,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Register"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/design"
         android:onClick="registerUser"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

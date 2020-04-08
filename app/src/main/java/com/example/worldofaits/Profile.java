@@ -67,7 +67,9 @@ CircleImageView img;
         myRef = FirebaseDatabase.getInstance().getReference();
         //Toast.makeText(this, ""+mAuth.getCurrentUser().toString(), Toast.LENGTH_SHORT).show();
         //Toast.makeText(this, "user id :" + userid, Toast.LENGTH_SHORT).show();
-
+            cid.setEnabled(false);
+            mail.setEnabled(false);
+            password.setEnabled(false);
         uRef=myRef.child("AITS").child("Total").child(userid);
        ValueEventListener eventListener=new ValueEventListener() {
             @Override
@@ -224,9 +226,6 @@ CircleImageView img;
        }
 
         myRef.child("AITS").child("Total").child(userid).child("fullName").setValue(sname);
-        myRef.child("AITS").child("Total").child(userid).child("collegeID").setValue(scid);
-        myRef.child("AITS").child("Total").child(userid).child("email").setValue(smail);
-        myRef.child("AITS").child("Total").child(userid).child("password").setValue(spassword);
 
     }
 

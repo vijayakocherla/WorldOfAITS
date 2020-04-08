@@ -122,8 +122,9 @@ public class Register extends AppCompatActivity {
             return;
         }
         //String roll=new String(ak1a0);
-        boolean notcid= (cid.contains("ak1a0")||cid.contains("ak5a0")||cid.contains("AK1A0")||cid.contains("AK5A0")||cid.contains("aitstpt"))&&(cid.length()==13||cid.length()==10);
-        if(!notcid){
+        boolean ccid= (cid.contains("ak1a0")||cid.contains("ak5a0")||cid.contains("AK1A0")||cid.contains("AK5A0")||cid.contains("aitstpt"))&&(cid.length()==13||cid.length()==10);
+        boolean admin=cid.contains("aitstptadmin");
+        if(!(ccid||admin)){
             id.setError("it is not aits ID");
             return;
         }

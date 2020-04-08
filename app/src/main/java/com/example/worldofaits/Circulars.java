@@ -53,26 +53,34 @@ DataModelFile dfc;
         fbc=view.findViewById(R.id.uploaddoc);
         final RecyclerView rvc =view.findViewById(R.id.circulars_recycler);
         databaseReference= FirebaseDatabase.getInstance().getReference();
-        rvc.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+        rvc.setLayoutManager(linearLayoutManager);
+        //rvc.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,true));
         dfc=new DataModelFile();
         mAuth= FirebaseAuth.getInstance();
         userid=mAuth.getUid();
-        databaseReference.child("AITS").child("Faculty").child(userid).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    // fmc2.setVisibility(View.GONE);
+        if(userid==null){
+            fbc.setVisibility(View.GONE);
+        }
+        else {
+            databaseReference.child("AITS").child("Faculty").child(userid).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        // fmc2.setVisibility(View.GONE);
+                    } else {
+                        fbc.setVisibility(View.GONE);
+                    }
                 }
-                else {
-                    fbc.setVisibility(View.GONE);
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-              //  Toast.makeText(Circulars.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    //  Toast.makeText(Circulars.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
         fbc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

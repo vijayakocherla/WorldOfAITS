@@ -38,7 +38,11 @@ public class Cse4 extends AppCompatActivity {
         setContentView(R.layout.activity_cse4);
         fmc4=findViewById(R.id.uploadmatc4);
         final RecyclerView rc4 =findViewById(R.id.cse4_recycler);
-        rc4.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+        rc4.setLayoutManager(linearLayoutManager);
+//        rc4.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         dref= FirebaseDatabase.getInstance().getReference();
         sref= FirebaseStorage.getInstance().getReference();
         dmf=new DataModelFile();

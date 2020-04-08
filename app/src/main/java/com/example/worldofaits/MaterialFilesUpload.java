@@ -145,6 +145,38 @@ public class MaterialFilesUpload extends AppCompatActivity {
                                 dRef.child("EEE").child("EEE4").child(SystemClock.elapsedRealtime() + "").setValue(df);
                                 finish();
                             }
+                            else if(getIntent().getStringExtra("branch").equals("mech1")) {
+                                dRef.child("MECH").child("MECH1").child(SystemClock.elapsedRealtime() + "").setValue(df);
+                                finish();
+                            }
+                            else if(getIntent().getStringExtra("branch").equals("mech2")) {
+                                dRef.child("MECH").child("MECH2").child(SystemClock.elapsedRealtime() + "").setValue(df);
+                                finish();
+                            }
+                            else if(getIntent().getStringExtra("branch").equals("mech3")) {
+                                dRef.child("MECH").child("MECH3").child(SystemClock.elapsedRealtime() + "").setValue(df);
+                                finish();
+                            }
+                            else if(getIntent().getStringExtra("branch").equals("mech4")) {
+                                dRef.child("MECH").child("MECH4").child(SystemClock.elapsedRealtime() + "").setValue(df);
+                                finish();
+                            }
+                            else if(getIntent().getStringExtra("branch").equals("civil1")) {
+                                dRef.child("CIVIL").child("CIVIL1").child(SystemClock.elapsedRealtime() + "").setValue(df);
+                                finish();
+                            }
+                            else if(getIntent().getStringExtra("branch").equals("civil2")) {
+                                dRef.child("CIVIL").child("CIVIL2").child(SystemClock.elapsedRealtime() + "").setValue(df);
+                                finish();
+                            }
+                            else if(getIntent().getStringExtra("branch").equals("civil3")) {
+                                dRef.child("CIVIL").child("CIVIL3").child(SystemClock.elapsedRealtime() + "").setValue(df);
+                                finish();
+                            }
+                            else if(getIntent().getStringExtra("branch").equals("civil4")) {
+                                dRef.child("CIVIL").child("CIVIL4").child(SystemClock.elapsedRealtime() + "").setValue(df);
+                                finish();
+                            }
 
                         }
                     });

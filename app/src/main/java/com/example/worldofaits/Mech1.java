@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,67 +23,63 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Campus extends AppCompatActivity {
-FloatingActionButton fc;
+public class Mech1 extends AppCompatActivity {
+    FloatingActionButton fmm1;
+
+    StorageReference sref;
     DatabaseReference dref;
-    DataModelImg dmi;
+    DataModelFile dmf;
     FirebaseAuth mAuth;
-StorageReference sref;
-String userid;
+    String userid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_campus);
-
-        fc=findViewById(R.id.uploadhere2);
-        final RecyclerView rv =findViewById(R.id.campus_recycler);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        linearLayoutManager.setStackFromEnd(true);
-        linearLayoutManager.setReverseLayout(true);
-        rv.setLayoutManager(linearLayoutManager);
-        // rv.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,true));
+        setContentView(R.layout.activity_mech1);
+        fmm1=findViewById(R.id.uploadmatm1);
+        final RecyclerView rm1 =findViewById(R.id.mech1_recycler);
+        rm1.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         dref= FirebaseDatabase.getInstance().getReference();
         sref= FirebaseStorage.getInstance().getReference();
-        dmi=new DataModelImg();
+        dmf=new DataModelFile();
         mAuth= FirebaseAuth.getInstance();
         userid=mAuth.getUid();
-        if(userid==null){
-            fc.setVisibility(View.GONE);
-        }
-        else{
-        dref.child("AITS").child("CRT").child(userid).addValueEventListener(new ValueEventListener() {
+        dref.child("AITS").child("Faculty").child(userid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     // fmc2.setVisibility(View.GONE);
                 }
                 else {
-                    fc.setVisibility(View.GONE);
+                    fmm1.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                //  Toast.makeText(Circulars.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Mech1.this, ""+databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        });}
-        fc.setOnClickListener(new View.OnClickListener() {
+        });
+        fmm1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Campus.this, ImageCampus.class));
+                Intent intent=new Intent(Mech1.this, MaterialFilesUpload.class);
+                intent.putExtra("branch","mech1");
+                startActivity(intent);
+
+                // startActivity(new Intent(Cse1.this, CseFileUploads.class));
 
             }});
-        dref.child("urlscampus").addValueEventListener(new ValueEventListener() {
+        dref.child("MECH").child("MECH1").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<DataModelImg> dataModelImgList=new ArrayList<>();
+                List<DataModelFile> dataModelFiles=new ArrayList<>();
                 for(DataSnapshot ds:dataSnapshot.getChildren()){
-                    dmi=  ds.getValue(DataModelImg.class);
-                    dataModelImgList.add(dmi);
+                    dmf=  ds.getValue(DataModelFile.class);
+                    dataModelFiles.add(dmf);
 
                 }
-                HosAdapter camfeed=new HosAdapter(getApplication(),dataModelImgList);
-                rv.setAdapter(camfeed);
+                FileAdapter matm1=new FileAdapter(getApplication(),dataModelFiles);
+                rm1.setAdapter(matm1);
 
                 // Toast.makeText(Hostel.this, ""+dataModelImgList.get(0).getUri(), Toast.LENGTH_SHORT).show();
             }
@@ -93,9 +89,5 @@ String userid;
 
             }
         });
-
-
-
     }
-
 }

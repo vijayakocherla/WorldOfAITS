@@ -17,19 +17,19 @@ public class MechMaterialView extends AppCompatActivity {
 
     public void first(View view) {
 
-        startActivity(new Intent(this,Cse1.class));
+        startActivity(new Intent(this,Mech1.class));
     }
     public void second(View view) {
-        startActivity(new Intent(this,Cse2.class));
+        startActivity(new Intent(this,Mech2.class));
 
     }
 
     public void third(View view) {
-        startActivity(new Intent(this,Cse3.class));
+        startActivity(new Intent(this,Mech3.class));
 
     }
     public void fourth(View view) {
-        startActivity(new Intent(this,Cse4.class));
+        startActivity(new Intent(this,Mech4.class));
 
     }
 

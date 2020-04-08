@@ -55,7 +55,11 @@ FirebaseAuth mAuth;
         final RecyclerView rvn=view.findViewById(R.id.news_recycler);
         mAuth=FirebaseAuth.getInstance();
         dref= FirebaseDatabase.getInstance().getReference();
-        rvn.setLayoutManager(new LinearLayoutManager(getContext()));
+       // rvn.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,true));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+        rvn.setLayoutManager(linearLayoutManager);
         dmi=new DataModelImg();
         if(mAuth.getUid()==null){
             nf.setVisibility(View.GONE);

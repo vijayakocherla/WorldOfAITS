@@ -75,6 +75,7 @@ EditText mail,key;
                         Intent in=new Intent(Login.this,MainActivity.class);
                         in.putExtra("name","aits");
                         startActivity(in);
+                        finish();
 
                     } else {
                         // If sign in fails, display a message to the user.
