@@ -37,7 +37,10 @@ public class Mech2 extends AppCompatActivity {
         setContentView(R.layout.activity_mech2);
         fmm2=findViewById(R.id.uploadmatm2);
         final RecyclerView rm2 =findViewById(R.id.mech2_recycler);
-        rm2.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+        rm2.setLayoutManager(linearLayoutManager);
         dref= FirebaseDatabase.getInstance().getReference();
         sref= FirebaseStorage.getInstance().getReference();
         dmf=new DataModelFile();

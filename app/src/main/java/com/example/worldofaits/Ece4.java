@@ -37,7 +37,11 @@ protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_ece4);
         fme4=findViewById(R.id.uploadmate4);
         final RecyclerView re4 =findViewById(R.id.ece4_recycler);
-        re4.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+        re4.setLayoutManager(linearLayoutManager);
+       // re4.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         dref= FirebaseDatabase.getInstance().getReference();
         sref= FirebaseStorage.getInstance().getReference();
         dmf=new DataModelFile();

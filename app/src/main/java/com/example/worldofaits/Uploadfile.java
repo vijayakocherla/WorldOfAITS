@@ -105,8 +105,8 @@ String userid,name,time;
 
                     df=new DataModelFile(name,uri.toString(),path,time);
                     dRef.child("circularurls").child(SystemClock.elapsedRealtime()+"").setValue(df);
-                    startActivity(new Intent(Uploadfile.this,Circulars.class));
-
+                   // startActivity(new Intent(Uploadfile.this,Circulars.class));
+                    finish();
                 }
             });
 

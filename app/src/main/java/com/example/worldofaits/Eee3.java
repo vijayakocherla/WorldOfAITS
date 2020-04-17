@@ -37,7 +37,11 @@ public class Eee3 extends AppCompatActivity {
         setContentView(R.layout.activity_eee3);
         fmee3=findViewById(R.id.uploadmatee3);
         final RecyclerView ree3 =findViewById(R.id.eee3_recycler);
-        ree3.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+        ree3.setLayoutManager(linearLayoutManager);
+        //ree3.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         dref= FirebaseDatabase.getInstance().getReference();
         sref= FirebaseStorage.getInstance().getReference();
         dmf=new DataModelFile();

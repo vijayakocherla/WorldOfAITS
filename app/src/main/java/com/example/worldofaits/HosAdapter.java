@@ -1,5 +1,6 @@
 package com.example.worldofaits;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.text.method.ScrollingMovementMethod;
 import android.util.AttributeSet;
@@ -39,7 +40,7 @@ public class HosAdapter extends RecyclerView.Adapter<HosAdapter.ViewInfo>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewInfo holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewInfo holder, int position) {
         holder.subject.setText(idata.get(position).getSubject());
         holder.message.setText(idata.get(position).getMessage());
         holder.message.setMovementMethod(new ScrollingMovementMethod());
@@ -47,7 +48,7 @@ public class HosAdapter extends RecyclerView.Adapter<HosAdapter.ViewInfo>{
         holder.time.setText(idata.get(position).getTime());
         holder.name.setText(idata.get(position).getFullName());
 
-        String url=idata.get(position).getUri();
+        final String url=idata.get(position).getUri();
         if(url!=null) {
             Picasso.get().load(url).into(holder.img);
                    }

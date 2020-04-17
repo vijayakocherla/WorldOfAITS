@@ -123,8 +123,8 @@ public class ImageNews extends AppCompatActivity {
                             Toast.makeText(ImageNews.this, "Image uploaded", Toast.LENGTH_SHORT).show();
                             dataModelImg = new DataModelImg(uri.toString(), mes.getText().toString(), sub.getText().toString(), name, cid, email,time,propic);
                             dref.child("urlsnews").child(SystemClock.elapsedRealtime() + "").setValue(dataModelImg);
-                            startActivity(new Intent(ImageNews.this,NewsFeed.class));
-
+                           // startActivity(new Intent(ImageNews.this,NewsFeed.class));
+                            finish();
                         }
                     });}
         else {
@@ -132,7 +132,8 @@ public class ImageNews extends AppCompatActivity {
             dataModelImg = new DataModelImg(null, mes.getText().toString(), sub.getText().toString(), name, cid, email,time,propic);
             dref.child("urlsnews").child(SystemClock.elapsedRealtime() + "").setValue(dataModelImg);
             Toast.makeText(ImageNews.this, "text uploaded", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(ImageNews.this,NewsFeed.class));
+            //startActivity(new Intent(ImageNews.this,NewsFeed.class));
+            finish();
         }
 
     }

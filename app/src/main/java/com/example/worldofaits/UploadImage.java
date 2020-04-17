@@ -128,7 +128,8 @@ String name="";
                         Toast.makeText(UploadImage.this, "Image uploaded", Toast.LENGTH_SHORT).show();
                         dataModelImg = new DataModelImg(uri.toString(), mes.getText().toString(), sub.getText().toString(), name, cid, email,time,propic);
                         dref.child("urls").child(SystemClock.elapsedRealtime() + "").setValue(dataModelImg);
-                        startActivity(new Intent(UploadImage.this,Hostel.class));
+                        //startActivity(new Intent(UploadImage.this,Hostel.class));
+                    finish();
                     }
                 });}
          else {
@@ -136,8 +137,8 @@ String name="";
             dataModelImg = new DataModelImg(null, mes.getText().toString(), sub.getText().toString(), name, cid, email,time,propic);
             dref.child("urls").child(SystemClock.elapsedRealtime() + "").setValue(dataModelImg);
             Toast.makeText(UploadImage.this, "text uploaded", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(UploadImage.this,Hostel.class));
-
+           // startActivity(new Intent(UploadImage.this,Hostel.class));
+            finish();
         }
 
     }

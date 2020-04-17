@@ -38,7 +38,10 @@ public class Ece1 extends AppCompatActivity {
         fme1=findViewById(R.id.uploadmate1);
 
         final RecyclerView re1 =findViewById(R.id.ece1_recycler);
-        re1.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+        re1.setLayoutManager(linearLayoutManager);
         dref= FirebaseDatabase.getInstance().getReference();
         sref= FirebaseStorage.getInstance().getReference();
         dmf=new DataModelFile();

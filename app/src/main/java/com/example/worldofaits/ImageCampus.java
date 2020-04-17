@@ -127,8 +127,8 @@ public class ImageCampus extends AppCompatActivity {
                             Toast.makeText(ImageCampus.this, "Image uploaded", Toast.LENGTH_SHORT).show();
                             dataModelImg = new DataModelImg(uri.toString(), mes.getText().toString(), sub.getText().toString(), name, cid, email,time,propic);
                             dref.child("urlscampus").child(SystemClock.elapsedRealtime() + "").setValue(dataModelImg);
-                            startActivity(new Intent(ImageCampus.this,Campus.class));
-
+                            //startActivity(new Intent(ImageCampus.this,Campus.class));
+                            finish();
                         }
                     });}
         else {
@@ -136,8 +136,8 @@ public class ImageCampus extends AppCompatActivity {
             dataModelImg = new DataModelImg(null, mes.getText().toString(), sub.getText().toString(), name, cid, email,time,propic);
             dref.child("urlscampus").child(SystemClock.elapsedRealtime() + "").setValue(dataModelImg);
             Toast.makeText(ImageCampus.this, "text uploaded", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(ImageCampus.this,Campus.class));
-
+           // startActivity(new Intent(ImageCampus.this,Campus.class));
+            finish();
         }
 
     }
